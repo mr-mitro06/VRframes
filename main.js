@@ -126,4 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 7. Hero Slider — Auto-rotate with cinematic crossfade
+    const slides = document.querySelectorAll('.hero-slide');
+    if (slides.length > 1) {
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+    }
+
 });
