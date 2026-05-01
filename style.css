@@ -1480,9 +1480,10 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     }
     
     .portfolio-item {
-        flex: 0 0 85vw; /* Each item takes up 85% of viewport width so the next one peeks */
+        flex: 0 0 80vw; /* Each item takes up 80% of viewport width */
         scroll-snap-align: center;
-        aspect-ratio: 4 / 5; /* Slightly taller for mobile swiping looks better */
+        aspect-ratio: 3 / 4; /* Optimized for mobile viewing without overflowing */
+        height: auto;
     }
 }
 
