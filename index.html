@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VR FRAMES | Luxury Photography Studio</title>
+    <meta name="description" content="VR FRAMES - Elite Photography Studio. Capturing cinematic moments in stunning 4K quality.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <span class="preloader-text">VR</span>
+            <div class="preloader-line"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">
+                <span class="logo-v">V</span><span class="logo-r">R</span>
+                <span class="logo-text">FRAMES</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Expertise</a></li>
+                <li><a href="#portfolio">Gallery</a></li>
+                <li><a href="#contact">Reserve</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="icon-light"></i>
+                    <i data-lucide="moon" class="icon-dark"></i>
+                </button>
+                <div class="nav-toggle" id="nav-toggle">
+                    <i data-lucide="menu"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-slider">
+                <div class="hero-slide active">
+                    <img src="hero/WhatsApp Image 2026-01-22 at 10.16.14 PM.jpeg" alt="VR Frames Cinematic">
+                    <div class="hero-overlay"></div>
+                </div>
+            </div>
+            
+            <div class="hero-content container">
+                <div class="hero-badge" data-aos="fade-up">Premium Photography</div>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                    <span class="text-outline">TIMELESS</span><br>ELEGANCE
+                </h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="400">
+                    Crafting cinematic narratives through the lens. Your most luxurious moments immortalized in breathtaking 4K clarity.
+                </p>
+                <div class="hero-btns" data-aos="fade-up" data-aos-delay="600">
+                    <a href="#portfolio" class="btn btn-primary">
+                        <span class="btn-text">EXPLORE GALLERY</span>
+                        <div class="btn-hover-effect"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>DISCOVER</span>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services section" id="services">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">Our Mastery</span>
+                    <h2 class="section-title">THE ART OF VISION</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" data-aos="fade-up">
+                        <div class="service-bg"></div>
+                        <div class="service-icon"><i data-lucide="gem"></i></div>
+                        <h3 class="service-name">Wedding Photography</h3>
+                        <p class="service-desc">Capturing the grandeur and emotion of your special day with unparalleled cinematic flair.</p>
+                        <a href="#contact" class="service-link">Inquire <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="service-bg"></div>
+                        <div class="service-icon"><i data-lucide="camera"></i></div>
+                        <h3 class="service-name">Editorial Portraits</h3>
+                        <p class="service-desc">High-fashion inspired portraiture that highlights your unique persona and elegance.</p>
+                        <a href="#contact" class="service-link">Inquire <i data-lucide="arrow-right"></i></a>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-bg"></div>
+                        <div class="service-icon"><i data-lucide="video"></i></div>
+                        <h3 class="service-name">Cinematic Films</h3>
+                        <p class="service-desc">Immersive 4K storytelling that brings your most cherished memories to life in motion.</p>
+                        <a href="#contact" class="service-link">Inquire <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio section" id="portfolio">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <span class="section-subtitle">Curated Masterpieces</span>
+                    <h2 class="section-title">OUR GALLERY</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <div class="portfolio-item tall" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.15 PM.jpeg" alt="Gallery Masterpiece 1">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>Eternal Love</h3>
+                                <span>Wedding</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item wide" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.16 PM (1).jpeg" alt="Gallery Masterpiece 2">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>Golden Hour</h3>
+                                <span>Portrait</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.16 PM.jpeg" alt="Gallery Masterpiece 3">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>The Vows</h3>
+                                <span>Ceremony</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item tall" data-aos="zoom-in" data-aos-delay="150">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.17 PM.jpeg" alt="Gallery Masterpiece 4">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>Radiance</h3>
+                                <span>Bridal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="250">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.19 PM (1).jpeg" alt="Gallery Masterpiece 5">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>Celebration</h3>
+                                <span>Event</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item wide" data-aos="zoom-in" data-aos-delay="350">
+                        <img src="PICS/WhatsApp Image 2026-04-17 at 1.35.19 PM.jpeg" alt="Gallery Masterpiece 6">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3>Candid Joy</h3>
+                                <span>Lifestyle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee Section -->
+        <div class="marquee-section">
+            <div class="marquee-content">
+                <span>LUXURY</span> <i data-lucide="star"></i>
+                <span>CINEMATIC</span> <i data-lucide="star"></i>
+                <span>ELEGANT</span> <i data-lucide="star"></i>
+                <span>TIMELESS</span> <i data-lucide="star"></i>
+                <span>PREMIUM</span> <i data-lucide="star"></i>
+                <span>LUXURY</span> <i data-lucide="star"></i>
+                <span>CINEMATIC</span> <i data-lucide="star"></i>
+                <span>ELEGANT</span> <i data-lucide="star"></i>
+                <span>TIMELESS</span> <i data-lucide="star"></i>
+                <span>PREMIUM</span> <i data-lucide="star"></i>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info" data-aos="fade-right">
+                        <h2 class="contact-title">RESERVE<br>YOUR DATE</h2>
+                        <p class="contact-desc">Experience the pinnacle of luxury photography. Let us craft a visual legacy that transcends time.</p>
+                        
+                        <div class="contact-details">
+                            <a href="tel:+916282602423" class="contact-item">
+                                <div class="icon-box"><i data-lucide="phone"></i></div>
+                                <div class="item-text">
+                                    <span class="label">Direct Line</span>
+                                    <span class="value">+91 6282602423</span>
+                                </div>
+                            </a>
+                            <a href="mailto:vrphotography555@gmail.com" class="contact-item">
+                                <div class="icon-box"><i data-lucide="mail"></i></div>
+                                <div class="item-text">
+                                    <span class="label">Email Inquiry</span>
+                                    <span class="value">vrphotography555@gmail.com</span>
+                                </div>
+                            </a>
+                            <a href="https://instagram.com/_vr_photography._" target="_blank" class="contact-item">
+                                <div class="icon-box"><i data-lucide="instagram"></i></div>
+                                <div class="item-text">
+                                    <span class="label">Instagram Portfolio</span>
+                                    <span class="value">@_vr_photography._</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-box" data-aos="fade-left">
+                        <form class="luxury-form">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <input type="text" id="name" required>
+                                    <label for="name">First & Last Name</label>
+                                    <span class="focus-border"></span>
+                                </div>
+                                <div class="input-group">
+                                    <input type="email" id="email" required>
+                                    <label for="email">Email Address</label>
+                                    <span class="focus-border"></span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <select id="service" required>
+                                    <option value="" disabled selected></option>
+                                    <option value="wedding">Wedding Coverage</option>
+                                    <option value="portrait">Editorial Portrait</option>
+                                    <option value="event">Luxury Event</option>
+                                </select>
+                                <label for="service">Service of Interest</label>
+                                <span class="focus-border"></span>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="message" required></textarea>
+                                <label for="message">Event Details & Vision</label>
+                                <span class="focus-border"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-btn">
+                                <span class="btn-text">REQUEST AVAILABILITY</span>
+                                <div class="btn-hover-effect"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-v">V</span><span class="logo-r">R</span>
+                        <span class="logo-text">FRAMES</span>
+                    </a>
+                    <p>Elevating moments to cinematic masterpieces.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#portfolio">Gallery</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="https://instagram.com/_vr_photography._" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Youtube"><i data-lucide="youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 VR FRAMES STUDIOS. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
