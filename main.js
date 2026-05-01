@@ -136,5 +136,138 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].classList.add('active');
         }, 5000);
     }
+    // 8. Gallery Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            let visibleCount = 0;
+            portfolioItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                    // Retrigger AOS animation
+                    item.classList.remove('aos-animate');
+                    setTimeout(() => item.classList.add('aos-animate'), 50);
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            // Fix masonry empty columns: dynamically adjust column count based on visible items
+            const grid = document.querySelector('.portfolio-grid');
+            if (window.innerWidth > 1200) {
+                grid.style.columnCount = Math.min(visibleCount, 3);
+            } else if (window.innerWidth > 992) {
+                grid.style.columnCount = Math.min(visibleCount, 3);
+            } else if (window.innerWidth > 768) {
+                grid.style.columnCount = Math.min(visibleCount, 2);
+            } else {
+                grid.style.columnCount = ""; // Let mobile CSS handle flex swipe
+            }
+
+            // Update lightbox images array
+            updateLightboxImages();
+        });
+    });
+
+    // 9. Lightbox Functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const nextBtn = document.querySelector('.lightbox-next');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    
+    let currentLightboxImages = [];
+    let currentImageIndex = 0;
+
+    function updateLightboxImages() {
+        currentLightboxImages = Array.from(document.querySelectorAll('.portfolio-item:not(.hidden) img'));
+    }
+
+    // Initial update
+    updateLightboxImages();
+
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const img = item.querySelector('img');
+            currentImageIndex = currentLightboxImages.indexOf(img);
+            if(currentImageIndex === -1) currentImageIndex = 0; // fallback
+            
+            showLightbox(img.src);
+        });
+    });
+
+    function showLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        lenis.stop();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lenis.start();
+        document.body.style.overflow = '';
+    }
+
+    function showNext() {
+        if(currentLightboxImages.length === 0) return;
+        currentImageIndex = (currentImageIndex + 1) % currentLightboxImages.length;
+        lightboxImg.src = currentLightboxImages[currentImageIndex].src;
+    }
+
+    function showPrev() {
+        if(currentLightboxImages.length === 0) return;
+        currentImageIndex = (currentImageIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+        lightboxImg.src = currentLightboxImages[currentImageIndex].src;
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', showNext);
+    prevBtn.addEventListener('click', showPrev);
+
+    // Close on background click
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target === document.querySelector('.lightbox-content')) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    lightbox.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, {passive: true});
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) showNext();
+        if (touchEndX > touchStartX + swipeThreshold) showPrev();
+    }
 
 });
