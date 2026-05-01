@@ -564,16 +564,21 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 .hero-slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    background-size: cover;
+    background-position: center 25%; /* Keeps faces/upper body in view for portraits */
+    background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity 2s ease-in-out;
+    transition: opacity 1.5s ease-in-out, transform 6s linear;
+    transform: scale(1.05);
+    /* Desaturate and darken heavily so it looks moody, timeless, and elegant */
+    filter: blur(6px) brightness(0.35) saturate(0.3) contrast(1.1); 
 }
 
 .hero-slide.active {
     opacity: 1;
+    transform: scale(1.1);
+    filter: blur(5px) brightness(0.4) saturate(0.4) contrast(1.1);
 }
 
 .hero-slide img {
@@ -896,8 +901,10 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 
 /* --- Portfolio Grid --- */
 .portfolio-grid {
-    column-count: 3;
-    column-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    align-items: start; /* Prevents vertical stretching, keeping natural aspect ratios */
     width: 100%;
 }
 
