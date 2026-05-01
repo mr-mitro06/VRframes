@@ -124,44 +124,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. Custom Cursor Logic
-    // Only init if device supports hover (desktop)
-    if (window.matchMedia("(pointer: fine)").matches) {
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
-        
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            // Slight delay for follower
-            setTimeout(() => {
-                follower.style.left = e.clientX + 'px';
-                follower.style.top = e.clientY + 'px';
-            }, 80);
-        });
-
-        // Hover effects
-        const interactiveElements = document.querySelectorAll('a, button, input, select, textarea, .portfolio-item');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                follower.style.width = '60px';
-                follower.style.height = '60px';
-                follower.style.backgroundColor = 'rgba(255, 215, 0, 0.1)';
-                follower.style.borderColor = 'rgba(255, 215, 0, 0.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                follower.style.width = '40px';
-                follower.style.height = '40px';
-                follower.style.backgroundColor = 'transparent';
-                follower.style.borderColor = 'var(--accent-main)';
-            });
-        });
-    } else {
-        // Remove cursors on touch devices
-        document.querySelector('.cursor')?.remove();
-        document.querySelector('.cursor-follower')?.remove();
-    }
 });
