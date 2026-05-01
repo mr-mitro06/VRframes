@@ -7,8 +7,8 @@
     <meta name="description" content="VR FRAMES - Elite Photography Studio. Capturing cinematic moments in stunning 4K quality.">
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
@@ -19,17 +19,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Dynamic Ambient Background -->
-    <div class="ambient-bg">
-        <div class="ambient-blob blob-1"></div>
-        <div class="ambient-blob blob-2"></div>
-    </div>
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <span class="preloader-text">VR</span>
-            <div class="preloader-line"></div>
+
+    <!-- Cinematic Preloader -->
+    <div class="preloader" id="preloader">
+        <!-- Left curtain -->
+        <div class="curtain curtain-left"></div>
+        <!-- Right curtain -->
+        <div class="curtain curtain-right"></div>
+        <!-- Center content -->
+        <div class="preloader-center">
+            <img src="logo/logo.png" alt="VR" class="preloader-logo">
+            <div class="preloader-line-reveal">
+                <div class="preloader-line-inner"></div>
+            </div>
+            <div class="preloader-brand">
+                <span class="brand-letter">V</span><span class="brand-letter">i</span><span class="brand-letter">s</span><span class="brand-letter">h</span><span class="brand-letter">n</span><span class="brand-letter">u</span><span class="brand-letter">R</span><span class="brand-letter">a</span><span class="brand-letter">j</span>
+                <span class="brand-spacer"></span>
+                <span class="brand-letter">F</span><span class="brand-letter">r</span><span class="brand-letter">a</span><span class="brand-letter">m</span><span class="brand-letter">e</span><span class="brand-letter">s</span>
+            </div>
         </div>
     </div>
 
@@ -37,8 +45,7 @@
     <header class="header">
         <nav class="nav container">
             <a href="#" class="logo">
-                <span class="logo-v">V</span><span class="logo-r">R</span>
-                <span class="logo-text">FRAMES</span>
+                <img src="logo/logo.png" alt="VR Frames Logo" class="logo-img">
             </a>
             
             <ul class="nav-links">
@@ -50,8 +57,8 @@
 
             <div class="nav-actions">
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
-                    <i data-lucide="sun" class="icon-light"></i>
-                    <i data-lucide="moon" class="icon-dark"></i>
+                    <svg class="icon-light" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                 </button>
                 <div class="nav-toggle" id="nav-toggle">
                     <i data-lucide="menu"></i>
@@ -291,8 +298,7 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#" class="logo">
-                        <span class="logo-v">V</span><span class="logo-r">R</span>
-                        <span class="logo-text">FRAMES</span>
+                        <img src="logo/logo.png" alt="VR Frames" class="logo-img footer-logo-img">
                     </a>
                     <p>Elevating moments to cinematic masterpieces.</p>
                 </div>

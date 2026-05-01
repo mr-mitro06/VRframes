@@ -22,13 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(raf);
 
-    // 2. Preloader Logic
-    const preloader = document.querySelector('.preloader');
+    // 2. Preloader Logic — Cinematic Curtain Reveal
+    const preloader = document.getElementById('preloader');
+    
+    // Wait for animations to play, then reveal
     setTimeout(() => {
-        preloader.classList.add('fade-out');
+        preloader.classList.add('reveal');
         setTimeout(() => {
             preloader.style.display = 'none';
-            // Initialize AOS after preloader
+            preloader.style.pointerEvents = 'none';
             AOS.init({
                 duration: 1000,
                 easing: 'ease-out-cubic',
@@ -36,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 offset: 50,
                 delay: 100
             });
-        }, 1000);
-    }, 1800);
+        }, 1300);
+    }, 2800);
 
     // 3. Initialize Icons
     lucide.createIcons();
