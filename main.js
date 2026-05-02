@@ -75,6 +75,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- HISTORY STATE MANAGEMENT (MOBILE BACK BUTTON FIX) ---
+    function openOverlay() {
+        history.pushState({ overlayOpen: true }, '', '');
+        lenis.stop();
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeAllOverlays() {
+        // 1. Close Nav Menu
+        if (isMenuOpen) {
+            isMenuOpen = false;
+            navLinks.classList.remove('active');
+            if (navToggle) navToggle.querySelector('i').setAttribute('data-lucide', 'menu');
+        }
+        
+        // 2. Close Lightbox
+        lightbox.classList.remove('active');
+        
+        // 3. Close Info Modals
+        infoModals.forEach(m => m.classList.remove('active'));
+        
+        lucide.createIcons();
+        lenis.start();
+        document.body.style.overflow = '';
+    }
+
+    window.addEventListener('popstate', (e) => {
+        // Hardware back button triggered
+        closeAllOverlays();
+    });
+
+    function closeOverlayFromUI() {
+        if (history.state && history.state.overlayOpen) {
+            history.back(); // Triggers popstate -> closeAllOverlays
+        } else {
+            closeAllOverlays();
+        }
+    }
+
     // 6. Mobile Navigation
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -82,21 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (navToggle) {
         navToggle.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            navLinks.classList.toggle('active');
-            
-            // Toggle icon
-            const icon = navToggle.querySelector('i');
-            if (isMenuOpen) {
-                icon.setAttribute('data-lucide', 'x');
-                // Lock scroll
-                lenis.stop();
-                document.body.style.overflow = 'hidden';
+            if (!isMenuOpen) {
+                isMenuOpen = true;
+                navLinks.classList.add('active');
+                navToggle.querySelector('i').setAttribute('data-lucide', 'x');
+                openOverlay();
             } else {
-                icon.setAttribute('data-lucide', 'menu');
-                // Unlock scroll
-                lenis.start();
-                document.body.style.overflow = '';
+                closeOverlayFromUI();
             }
             lucide.createIcons();
         });
@@ -106,12 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             if (isMenuOpen) {
-                isMenuOpen = false;
-                navLinks.classList.remove('active');
-                navToggle.querySelector('i').setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-                lenis.start();
-                document.body.style.overflow = '';
+                closeOverlayFromUI();
             }
             
             // Smooth scroll to anchor
@@ -136,15 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
             slides[currentSlide].classList.add('active');
         }, 5000);
     }
+
     // 8. Gallery Filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
             filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
             btn.classList.add('active');
 
             const filterValue = btn.getAttribute('data-filter');
@@ -154,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                     item.classList.remove('hidden');
                     visibleCount++;
-                    // Retrigger AOS animation
                     item.classList.remove('aos-animate');
                     setTimeout(() => item.classList.add('aos-animate'), 50);
                 } else {
@@ -162,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Fix masonry empty columns: dynamically adjust column count based on visible items
             const grid = document.querySelector('.portfolio-grid');
             if (window.innerWidth > 1200) {
                 grid.style.columnCount = Math.min(visibleCount, 3);
@@ -171,10 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (window.innerWidth > 768) {
                 grid.style.columnCount = Math.min(visibleCount, 2);
             } else {
-                grid.style.columnCount = ""; // Let mobile CSS handle flex swipe
+                grid.style.columnCount = ""; 
             }
 
-            // Update lightbox images array
             updateLightboxImages();
         });
     });
@@ -193,14 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLightboxImages = Array.from(document.querySelectorAll('.portfolio-item:not(.hidden) img'));
     }
 
-    // Initial update
     updateLightboxImages();
 
     portfolioItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const img = item.querySelector('img');
             currentImageIndex = currentLightboxImages.indexOf(img);
-            if(currentImageIndex === -1) currentImageIndex = 0; // fallback
+            if(currentImageIndex === -1) currentImageIndex = 0;
             
             showLightbox(img.src);
         });
@@ -209,14 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function showLightbox(src) {
         lightboxImg.src = src;
         lightbox.classList.add('active');
-        lenis.stop();
-        document.body.style.overflow = 'hidden';
+        openOverlay();
     }
 
     function closeLightbox() {
-        lightbox.classList.remove('active');
-        lenis.start();
-        document.body.style.overflow = '';
+        closeOverlayFromUI();
     }
 
     function showNext() {
@@ -232,26 +250,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     closeBtn.addEventListener('click', closeLightbox);
-    nextBtn.addEventListener('click', showNext);
-    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
 
-    // Close on background click
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox || e.target === document.querySelector('.lightbox-content')) {
             closeLightbox();
         }
     });
 
-    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return;
-        
         if (e.key === 'Escape') closeLightbox();
         if (e.key === 'ArrowRight') showNext();
         if (e.key === 'ArrowLeft') showPrev();
     });
 
-    // Touch Swipe Support
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -261,13 +275,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     lightbox.addEventListener('touchend', e => {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, {passive: true});
-
-    function handleSwipe() {
         const swipeThreshold = 50;
         if (touchEndX < touchStartX - swipeThreshold) showNext();
         if (touchEndX > touchStartX + swipeThreshold) showPrev();
-    }
+    }, {passive: true});
+
+    // 10. Info Modals (Privacy, Terms, Photographer)
+    const modalTriggers = document.querySelectorAll('.modal-trigger');
+    const infoModals = document.querySelectorAll('.info-modal-overlay');
+    const infoModalCloses = document.querySelectorAll('.info-modal-close');
+
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const modalId = trigger.getAttribute('data-modal');
+            const targetModal = document.getElementById(modalId);
+            if (targetModal) {
+                targetModal.classList.add('active');
+                openOverlay();
+            }
+        });
+    });
+
+    infoModalCloses.forEach(btn => {
+        btn.addEventListener('click', closeOverlayFromUI);
+    });
+
+    infoModals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeOverlayFromUI();
+            }
+        });
+    });
 
 });

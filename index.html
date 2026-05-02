@@ -276,21 +276,29 @@
                     </div>
 
                     <div class="contact-form-box" data-aos="fade-left">
-                        <form class="luxury-form">
+                        <div data-fs-success hidden style="padding: 2rem; text-align: center; color: var(--accent-main); font-size: 1.2rem; border: 1px solid var(--accent-main); border-radius: var(--radius-glass); background: rgba(0,0,0,0.5);">
+                            Thank you! Your inquiry has been received.
+                        </div>
+                        <form id="contact-form" class="luxury-form">
+                            <div data-fs-error hidden style="padding: 1rem; margin-bottom: 1rem; color: #ff4d4d; border: 1px solid #ff4d4d; border-radius: var(--radius-glass); background: rgba(255,0,0,0.1);">
+                                Oops! There was a problem submitting your form.
+                            </div>
                             <div class="form-row">
                                 <div class="input-group">
-                                    <input type="text" id="name" required>
+                                    <input type="text" id="name" name="name" required data-fs-field>
                                     <label for="name">First & Last Name</label>
                                     <span class="focus-border"></span>
+                                    <span data-fs-error="name" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 0.2rem; display: block;"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="email" id="email" required>
+                                    <input type="email" id="email" name="email" required data-fs-field>
                                     <label for="email">Email Address</label>
                                     <span class="focus-border"></span>
+                                    <span data-fs-error="email" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 0.2rem; display: block;"></span>
                                 </div>
                             </div>
                             <div class="input-group">
-                                <select id="service" required>
+                                <select id="service" name="service" required data-fs-field>
                                     <option value="" disabled selected></option>
                                     <option value="wedding">Wedding Coverage</option>
                                     <option value="portrait">Editorial Portrait</option>
@@ -298,13 +306,15 @@
                                 </select>
                                 <label for="service">Service of Interest</label>
                                 <span class="focus-border"></span>
+                                <span data-fs-error="service" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 0.2rem; display: block;"></span>
                             </div>
                             <div class="input-group">
-                                <textarea id="message" required></textarea>
+                                <textarea id="message" name="message" required data-fs-field></textarea>
                                 <label for="message">Event Details & Vision</label>
                                 <span class="focus-border"></span>
+                                <span data-fs-error="message" style="color: #ff4d4d; font-size: 0.8rem; margin-top: 0.2rem; display: block;"></span>
                             </div>
-                            <button type="submit" class="btn btn-primary submit-btn">
+                            <button type="submit" class="btn btn-primary submit-btn" data-fs-submit-btn>
                                 <span class="btn-text">REQUEST AVAILABILITY</span>
                                 <div class="btn-hover-effect"></div>
                             </button>
@@ -323,6 +333,10 @@
                         <img src="logo/logo.png" alt="VR Frames" class="logo-img footer-logo-img">
                     </a>
                     <p>Elevating moments to cinematic masterpieces.</p>
+                    <a href="#" class="btn btn-primary modal-trigger know-photographer-btn" data-modal="photographer-modal">
+                        <span class="btn-text">KNOW THE PHOTOGRAPHER</span>
+                        <div class="btn-hover-effect"></div>
+                    </a>
                 </div>
                 <div class="footer-links">
                     <h4>Explore</h4>
@@ -343,14 +357,71 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 VR FRAMES STUDIOS. All Rights Reserved.</p>
+                <div class="footer-copyright">
+                    <p>&copy; 2026 VR FRAMES STUDIOS. All Rights Reserved.</p>
+                    <p class="creator-credit" style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary); opacity: 0.8;">Created with ❤️ by Frylabs Studios.</p>
+                </div>
                 <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="#" class="modal-trigger" data-modal="privacy-modal">Privacy Policy</a>
+                    <a href="#" class="modal-trigger" data-modal="terms-modal">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Info Modals -->
+    <div class="info-modal-overlay" id="photographer-modal">
+        <div class="info-modal-content photographer-content">
+            <button class="info-modal-close" aria-label="Close">&times;</button>
+            <div class="photographer-split">
+                <div class="photographer-img-wrapper">
+                    <img src="hero/WhatsApp Image 2026-05-01 at 7.46.19 PM (1).jpeg" alt="Vishnu M Rajan">
+                </div>
+                <div class="photographer-details">
+                    <h3>Vishnu M Rajan</h3>
+                    <p class="photographer-role">Founder & Lead Photographer</p>
+                    <p>Passionate and crazy about the art of photography. Every frame captured is an expression of deep love for visual storytelling. From grand weddings to intimate editorial portraits, the vision is to turn every fleeting moment into a timeless cinematic masterpiece.</p>
+                    <div class="modal-socials">
+                        <a href="https://www.instagram.com/john_don_bosco5?igsh=MTI2eWdjNWtoOWg2Ng==" target="_blank" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-modal-overlay" id="privacy-modal">
+        <div class="info-modal-content text-modal">
+            <button class="info-modal-close" aria-label="Close">&times;</button>
+            <h3>Privacy Policy</h3>
+            <div class="modal-text-scroll" data-lenis-prevent>
+                <p>At VR FRAMES STUDIOS, your privacy is a priority. This policy outlines how we handle your personal information.</p>
+                <h4>1. Information Collection</h4>
+                <p>We collect information such as your name, email, phone number, and event details when you inquire about our services or book a session.</p>
+                <h4>2. Use of Images</h4>
+                <p>As a photography studio, capturing images is our core service. We retain the right to use photographs from your events in our portfolio, website, and social media for promotional purposes, unless a strict Non-Disclosure Agreement (NDA) is signed prior to the event.</p>
+                <h4>3. Data Protection</h4>
+                <p>Your contact details and sensitive information are kept secure and will never be sold or shared with third parties without your explicit consent.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-modal-overlay" id="terms-modal">
+        <div class="info-modal-content text-modal">
+            <button class="info-modal-close" aria-label="Close">&times;</button>
+            <h3>Terms of Service</h3>
+            <div class="modal-text-scroll" data-lenis-prevent>
+                <p>Welcome to VR FRAMES STUDIOS. By booking our services, you agree to the following terms.</p>
+                <h4>1. Booking & Retainer</h4>
+                <p>A non-refundable retainer fee is required to secure your date. The remaining balance is due prior to the event date or on the day of the shoot as agreed upon.</p>
+                <h4>2. Creative Control</h4>
+                <p>VR FRAMES STUDIOS retains full creative control over the shooting process, editing style, and final selection of delivered images. We edit photos to match our signature luxury cinematic style.</p>
+                <h4>3. Delivery of Assets</h4>
+                <p>Final high-resolution images and films will be delivered within the timeframe stated in your contract. Raw unedited files are not provided unless specifically purchased as an add-on.</p>
+                <h4>4. Liability</h4>
+                <p>While we take utmost care, in the unlikely event of data loss or equipment failure beyond our control, liability is limited to the refund of amounts paid.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
@@ -372,5 +443,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <script src="main.js"></script>
+
+    <!-- Formspree Integration -->
+    <script>
+      window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+      formspree('initForm', { formElement: '#contact-form', formId: 'mvzlgvyb' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>

@@ -393,6 +393,18 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     top: 16px;
 }
 
+[data-theme="light"] .header {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.08), 0 8px 32px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .header.scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.12), 0 8px 32px rgba(0,0,0,0.15);
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
@@ -623,7 +635,8 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     position: relative;
     z-index: 1;
     max-width: 900px;
-    padding-top: 140px;
+    padding-top: 40px;
+    padding-bottom: 80px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -727,6 +740,17 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     text-transform: uppercase;
     color: var(--text-primary);
     opacity: 0.8;
+}
+
+@media (max-height: 750px) {
+    .scroll-indicator {
+        bottom: 1rem;
+        transform: translateX(-50%) scale(0.8);
+    }
+    .hero-content {
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
 }
 
 /* --- Services --- */
@@ -1263,6 +1287,13 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     font-size: 1.1rem;
 }
 
+.know-photographer-btn {
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem !important;
+    font-size: 0.75rem;
+    width: auto;
+}
+
 .footer-logo-img {
     height: 55px !important;
 }
@@ -1381,6 +1412,7 @@ h1, h2, h3, h4, h5, h6, .font-heading {
         padding: 0 1rem;
         top: 16px;
         width: 94%;
+        min-width: auto;
     }
 
     .nav {
@@ -1435,6 +1467,15 @@ h1, h2, h3, h4, h5, h6, .font-heading {
         min-height: 600px; /* Much better for mobile screens */
     }
 
+    .hero-content {
+        padding-bottom: 20px;
+    }
+
+    .scroll-indicator {
+        bottom: 1.5rem;
+        transform: translateX(-50%) scale(0.8);
+    }
+
     .hero-title {
         font-size: clamp(3rem, 10vw, 4rem);
         margin-bottom: 1rem;
@@ -1480,6 +1521,14 @@ h1, h2, h3, h4, h5, h6, .font-heading {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    
+    .know-photographer-btn {
+        width: 80% !important;
+        max-width: 300px;
+        padding: 0.8rem 1rem !important;
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
     }
     
     .social-icons {
@@ -1546,6 +1595,194 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 @media (max-width: 576px) {
     .section {
         padding: 6rem 0;
+    }
+}
+
+/* --- Info Modals --- */
+.info-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 1.5rem;
+}
+
+.info-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.info-modal-content {
+    background: var(--bg-glass-heavy);
+    border: 1px solid var(--border-glass-strong);
+    border-radius: var(--radius-glass);
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 900px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.info-modal-overlay.active .info-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.info-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: var(--text-primary);
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: var(--transition-fast);
+}
+
+.info-modal-close:hover {
+    background: var(--accent-main);
+    color: var(--text-inverse);
+    transform: rotate(90deg);
+}
+
+.text-modal {
+    max-width: 700px;
+    padding: 4rem 3rem 3rem;
+}
+
+.text-modal h3 {
+    font-size: 2.5rem;
+    color: var(--accent-main);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.modal-text-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-text-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-text-scroll::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+}
+.modal-text-scroll::-webkit-scrollbar-thumb {
+    background: var(--accent-main);
+    border-radius: 10px;
+}
+
+.modal-text-scroll h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.modal-text-scroll p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.photographer-split {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+}
+
+.photographer-img-wrapper {
+    position: relative;
+    height: 100%;
+    min-height: 400px;
+}
+
+.photographer-img-wrapper img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photographer-details {
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.photographer-details h3 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.photographer-role {
+    color: var(--accent-main);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.photographer-details p:not(.photographer-role) {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.modal-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+}
+
+.modal-socials a:hover {
+    background: var(--accent-main);
+    color: var(--text-inverse);
+    border-color: var(--accent-main);
+}
+
+@media (max-width: 768px) {
+    .photographer-split {
+        grid-template-columns: 1fr;
+    }
+    .photographer-img-wrapper {
+        min-height: 300px;
+    }
+    .photographer-details {
+        padding: 2.5rem 2rem;
+    }
+    .text-modal {
+        padding: 4rem 1.5rem 2rem;
     }
 }
 
